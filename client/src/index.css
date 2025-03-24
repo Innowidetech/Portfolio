@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Afacad:ital,wght@0,400..700;1,400..700&family=Alatsi&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend+Deca:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Namdhinggo:wght@400;500;600;700;800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Sofia+Sans+Condensed:ital,wght@0,1..1000;1,1..1000&family=Yanone+Kaffeesatz:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Afacad:ital,wght@0,400..700;1,400..700&family=Alatsi&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend+Deca:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Namdhinggo:wght@400;500;600;700;800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Sofia+Sans+Condensed:ital,wght@0,1..1000;1,1..1000&family=Yanone+Kaffeesatz:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Charm:wght@400;700&family=Dancing+Script:wght@400..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.shadow-custom {
+    box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.15), 5px 5px 20px rgba(255, 255, 255, 0.15);
+  }
+
+  @media screen and (max-width: 320px){
+    .footer{
+      gap: 2px;
+    }
+    .collegeName{
+      width: 100px;
+      
+    }
+    .collegeName1{
+      width: 100px;
+      font-size: 2px;
+      margin-left: 1rem;
+      
+    }
+  }
+
+
+
+  @keyframes fallAndSettle {
+    0% {
+      opacity: 0;
+      transform: translateY(-200%) rotate(5deg);
+    }
+    50% {
+      transform: translateY(0) rotate(-3deg);
+    }
+    75% {
+      transform: translateY(-10%) rotate(2deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotate(0);
+    }
+  }
+  
+  @keyframes floatAround {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(var(--float-x1, 10px), var(--float-y1, -10px)) rotate(2deg);
+    }
+    50% {
+      transform: translate(var(--float-x2, -10px), var(--float-y2, 10px)) rotate(-2deg);
+    }
+    75% {
+      transform: translate(var(--float-x3, 10px), var(--float-y3, 5px)) rotate(1deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+  
+  .project-card {
+    position: absolute;
+    opacity: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .project-card.visible {
+    animation: 
+      fallAndSettle 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+      floatAround 8s ease-in-out infinite;
+  }
+  
+  /* Desktop positioning with grid layout */
+  @media (min-width: 1024px) {
+    .project-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .project-card:nth-child(n) { 
+      left: 5%; 
+      top: 60%;
+      --float-x1: 15px;
+      --float-y1: -15px;
+      --float-x2: -10px;
+      --float-y2: 10px;
+      --float-x3: 5px;
+      --float-y3: -5px;
+      animation-delay: 0.2s;
+    }
+  
+    .project-card:nth-child(2) { 
+      left: 5%; 
+      top: 60%;
+      --float-x1: -15px;
+      --float-y1: 10px;
+      --float-x2: 10px;
+      --float-y2: -15px;
+      --float-x3: -5px;
+      --float-y3: 5px;
+      animation-delay: 0.4s;
+    }
+  
+    .project-card:nth-child(3) { 
+      left: 35%; 
+      top: 55%;
+      --float-x1: 10px;
+      --float-y1: 15px;
+      --float-x2: -15px;
+      --float-y2: -10px;
+      --float-x3: 5px;
+      --float-y3: 10px;
+      animation-delay: 0.6s;
+    }
+  
+    .project-card:nth-child(4) { 
+      left: 50%; 
+      top: 65%;
+      --float-x1: -10px;
+      --float-y1: -15px;
+      --float-x2: 15px;
+      --float-y2: 10px;
+      --float-x3: -5px;
+      --float-y3: -10px;
+      animation-delay: 0.8s;
+    }
+  
+    .project-card:nth-child(5) { 
+      left: 65%; 
+      top: 40%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -10px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 1s;
+    }
+  
+    .project-card:nth-child(6) { 
+      left: 80%; 
+      top: 45%;
+      --float-x1: -15px;
+      --float-y1: -10px;
+      --float-x2: 10px;
+      --float-y2: 15px;
+      --float-x3: -5px;
+      --float-y3: -5px;
+      animation-delay: 1.2s;
+    }
+  
+    .project-card:nth-child(7) { 
+      left: 15%; 
+      top: 65%;
+      --float-x1: 10px;
+      --float-y1: -15px;
+      --float-x2: -15px;
+      --float-y2: 10px;
+      --float-x3: 5px;
+      --float-y3: -10px;
+      animation-delay: 1.4s;
+    }
+  
+    .project-card:nth-child(8) { 
+      left: 35%; 
+      top: 70%;
+      --float-x1: -10px;
+      --float-y1: 15px;
+      --float-x2: 15px;
+      --float-y2: -10px;
+      --float-x3: -5px;
+      --float-y3: 10px;
+      animation-delay: 1.6s;
+    }
+  
+    .project-card:nth-child(9) { 
+      left: 55%; 
+      top: 75%;
+      --float-x1: 15px;
+      --float-y1: -10px;
+      --float-x2: -15px;
+      --float-y2: 15px;
+      --float-x3: 10px;
+      --float-y3: -5px;
+      animation-delay: 1.8s;
+    }
+  
+    .project-card:nth-child(10) { 
+      left: 75%; 
+      top: 60%;
+      --float-x1: -15px;
+      --float-y1: 10px;
+      --float-x2: 10px;
+      --float-y2: -15px;
+      --float-x3: -5px;
+      --float-y3: 5px;
+      animation-delay: 2s;
+    }
+  
+    .project-card:nth-child(11) { 
+      left: 80%; 
+      top: 70%;
+      --float-x1: 10px;
+      --float-y1: 15px;
+      --float-x2: -10px;
+      --float-y2: -10px;
+      --float-x3: 5px;
+      --float-y3: 15px;
+      animation-delay: 2.2s;
+    }
+  
+    .project-card:nth-child(12) { 
+      left: 15%; 
+      top: 45%;
+      --float-x1: -15px;
+      --float-y1: -15px;
+      --float-x2: 15px;
+      --float-y2: 10px;
+      --float-x3: -10px;
+      --float-y3: -5px;
+      animation-delay: 2.4s;
+    }
+  
+    .project-card:nth-child(13) { 
+      left: 60%; 
+      top: 50%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -15px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 2.6s;
+    }
+
+    .project-card:nth-child(14) { 
+      left: 30%; 
+      top: 60%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -15px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 2.6s;
+    }
+
+    .project-card:nth-child(15) { 
+      left: 47%; 
+      top: 58%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -15px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 2.6s;
+    }
+
+    .project-card:nth-child(16) { 
+      left: 33%; 
+      top: 48%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -15px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 2.6s;
+    }
+
+    .project-card:nth-child(17) { 
+      left: 66%; 
+      top: 49%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -15px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 2.6s;
+    }
+
+    .project-card:nth-child(18) { 
+      left: 77%; 
+      top: 37%;
+      --float-x1: 15px;
+      --float-y1: 10px;
+      --float-x2: -15px;
+      --float-y2: -15px;
+      --float-x3: 10px;
+      --float-y3: 5px;
+      animation-delay: 2.6s;
+    }
+  
+    .hide-mobile {
+      display: block;
+    }
+  }
+  
+  /* Mobile positioning */
+  @media (max-width: 1023px) {
+    .hide-mobile {
+      display: none;
+    }
+    
+    .show-mobile:nth-child(1) { 
+      left: 10%; 
+      animation-delay: 0.2s;
+      --float-x1: 15px;
+      --float-y1: -10px;
+      --float-x2: -10px;
+      --float-y2: 15px;
+      --float-x3: 5px;
+      --float-y3: -5px;
+    }
+  
+    .show-mobile:nth-child(2) { 
+      left: 40%; 
+      animation-delay: 0.4s;
+      --float-x1: -15px;
+      --float-y1: 10px;
+      --float-x2: 10px;
+      --float-y2: -15px;
+      --float-x3: -5px;
+      --float-y3: 5px;
+    }
+  
+    .show-mobile:nth-child(3) { 
+      left: 70%; 
+      animation-delay: 0.6s;
+      --float-x1: 10px;
+      --float-y1: 15px;
+      --float-x2: -15px;
+      --float-y2: -10px;
+      --float-x3: 5px;
+      --float-y3: 10px;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes loopFade {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  .span1 {
+    animation: fadeIn 0.5s forwards, loopFade 5s infinite;
+    animation-timing-function: ease-in-out;
+    display: inline-block;
+  }
+  
+  .client-images-wrapper {
+    display: flex;
+    gap: 10px; /* Keep the same spacing between images */
+    overflow: hidden;
+    position: relative;
+    width: 100%; /* Ensure it takes up the full width */
+  }
+  
+  .client-image-container {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .client-image {
+    width: 64px; /* Adjust based on your desired image size */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  @media (max-width: 767px) {
+    .client-images-wrapper {
+      animation: marquee 10s linear infinite; /* Adjust the timing here for speed */
+    }
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%); /* Start the animation from outside the container's right edge */
+    }
+    100% {
+      transform: translateX(-100%); /* End the animation at the left edge */
+    }
+  }
+  
+  @keyframes falling {
+    0% {
+      transform: translateY(-100px); /* Start above the original position */
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0); /* End at the original position */
+      opacity: 1; /* Fade in */
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  
+  /* text animation of client sub title */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .animate-blink {
+    animation: blink 1s infinite;
+  }
+  
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    margin-left: 2px;
+  }
