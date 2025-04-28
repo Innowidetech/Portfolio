@@ -9,6 +9,7 @@ const Certificate = require('../models/certificate');
 const Services = require('../models/services');
 const sanitize = require('sanitize-html');
 const Blog = require('../models/blog');
+const MiniProjects = require('../models/miniProjects');
 
 exports.profile = async (req, res) => {
     try {
@@ -132,7 +133,7 @@ exports.createWork = async (req, res) => {
         }
 
         const { title, githubUrl, description, projectUrl, skills } = req.body;
-        if (!title || !description || !projectUrl || !skills || !skills.length) {
+        if (!title || !description || !githubUrl || !projectUrl || !skills || !skills.length) {
             return res.status(400).json({ message: "Provide all the details to create work." })
         };
 
@@ -162,7 +163,7 @@ exports.createWork = async (req, res) => {
 
 exports.getWorks = async (req, res) => {
     try {
-        const works = await MyWorks.find().sort({ createdAt: -1 });
+        const works = await MyWorks.find({userId:loggedinuser._id}).sort({ createdAt: -1 });
         if (!works.length) { res.status(200).json({ message: "No works yet." }) }
         res.status(200).json({ works })
     } catch (err) {
@@ -218,6 +219,85 @@ exports.deleteWork = async (req, res) => {
         if (!work) { res.status(200).json({ message: "No work found with the id." }) }
 
         res.status(200).json({ message: "Work deleted successfully." })
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error.', error: err.message });
+    }
+};
+
+
+exports.createMiniProject = async (req, res) => {
+    try {
+        const loggedinuser = await User.findById(req.user && req.user.id);
+        if (!loggedinuser) {
+            return res.status(403).json({ message: 'Access denied, only logged-in user can access.' });
+        }
+
+        const { title, githubUrl, description, projectUrl, skills } = req.body;
+        if (!title || !description || !githubUrl || !projectUrl || !skills) {
+            return res.status(400).json({ message: "Provide all the details to create mini project."})
+        };
+
+        let skillsArray = skills ? skills.split(',') : []
+
+        const miniProject = new MiniProjects({
+            userId: loggedinuser._id, title, githubUrl, description, projectUrl, skills: skillsArray
+        });
+        await miniProject.save()
+        res.status(201).json({ message: "Mini project created successfully.", miniProject })
+
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error.', error: err.message });
+    }
+};
+
+
+exports.getMiniProjects = async (req, res) => {
+    try {
+        const miniProjects = await MiniProjects.find().sort({ createdAt: -1 });
+        if (!miniProjects.length) { res.status(200).json({ message: "No mini projects yet." }) }
+        res.status(200).json({ miniProjects })
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error.', error: err.message });
+    }
+};
+
+
+exports.editMiniProject = async (req, res) => {
+    try {
+        const loggedinuser = await User.findById(req.user && req.user.id);
+        if (!loggedinuser) {
+            return res.status(403).json({ message: 'Access denied, only logged-in user can access.' });
+        }
+        const { miniProjectId } = req.params;
+        if (!miniProjectId) { return res.status(400).json({ message: "Provide mini project id to edit." }) }
+
+        const updatedData = req.body;
+
+        const miniProject = await MiniProjects.findByIdAndUpdate(miniProjectId, updatedData, { new: true });
+        if (!miniProject) { res.status(400).json({ message: "No mini project found with the id." }) }
+
+        await miniProject.save();
+
+        res.status(200).json({ message: "Mini Project updated successfully.", miniProject })
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error.', error: err.message });
+    }
+};
+
+
+exports.deleteMiniProject = async (req, res) => {
+    try {
+        const loggedinuser = await User.findById(req.user && req.user.id);
+        if (!loggedinuser) {
+            return res.status(403).json({ message: 'Access denied, only logged-in user can access.' });
+        }
+        const { miniProjectId } = req.params;
+        if (!miniProjectId) { return res.status(400).json({ message: "Provide mini project id to delete." }) }
+
+        const miniProject = await MiniProjects.findOneAndDelete({ userId: loggedinuser._id, _id: miniProjectId });
+        if (!miniProject) { res.status(200).json({ message: "No mini project found with the id." }) }
+
+        res.status(200).json({ message: "Mini Project deleted successfully." })
     } catch (err) {
         return res.status(500).json({ message: 'Internal server error.', error: err.message });
     }

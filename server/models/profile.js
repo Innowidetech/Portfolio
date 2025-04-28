@@ -76,10 +76,6 @@ const ProfileSchema = new mongoose.Schema({
         required:true,
         default:0
     },
-    // experienceMonths:{
-    //     type:Number,
-    //     required:true
-    // },
     mobileNumber:{
         type:Number,
         required:true

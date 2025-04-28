@@ -1,13 +1,9 @@
 const mongoose = require('mongoose');
-const MyWorksSchema = new mongoose.Schema({
+const MiniProjectsSchema = new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true,
-    },
-    image:{
-        type:String,
-        require:true,
     },
     title:{
         type:String,
@@ -31,4 +27,4 @@ const MyWorksSchema = new mongoose.Schema({
     }],
 },{timestamps:true});
 
-module.exports = mongoose.model('MyWorks', MyWorksSchema);
+module.exports = mongoose.model('MiniProjects', MiniProjectsSchema);
